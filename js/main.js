@@ -1,67 +1,48 @@
-// let grade = [];
-// for(let i = 0; i < 10; i++){
-//     grade[i] = +prompt(`Enter grade # ${i} `);
-// }
-// for(let i = 0; i < 10; i++){
-//     document.write(grade[i]);
-// }
 
+let grades = [];
 
-// створення масиву для зберігання оцінок
-let marks = [];
-// отримання 10 оцінок від користувача та додавання їх до масиву
-for (let i = 1; i <= 10; i++) {
-  let mark = parseFloat(prompt(`Введіть оцінку №${i}:`));
-  marks.push(mark);
+for (let i = 0; i < 10; i++) {
+  grades[i] = +prompt("Enter grade №" + (i + 1) + ":");
 }
 
-// функція для виведення оцінок
-function showMarks() {
-  console.log(marks);
-}
-
-// функція для перездачі іспиту
-function retakeExam() {
-  let index = parseInt(prompt("Введіть номер елемента масиву:"));
-  let newMark = parseFloat(prompt("Введіть нову оцінку:"));
-  // перезаписуємо оцінку за вказаним індексом
-  marks[index - 1] = newMark;
-}
-
-// функція для перевірки можливості отримати стипендію
-function checkScholarship() {
-  let average = marks.reduce((a, b) => a + b) / marks.length;
-  if (average >= 10.7) {
-    console.log("Можна отримати стипендію");
-  } else {
-    console.log("Студент не отримує стипендію");
-  }
-}
-
-// основний код програми
-let choice;
+let option;
 do {
-  choice = parseInt(prompt(`Меню:
-  1. Вивід оцінок
-  2. Перездача іспиту
-  3. Перевірка можливості отримати стипендію
-  0. Вихід з програми
-  Введіть номер опції:`));
-  switch (choice) {
+  option = parseInt(prompt(`Option:
+    1. Show grades
+    2. Retaking the exam
+    3. Scholarship
+    0. Exit
+    Enter the option number: 1 2 3 0`));
+  switch (option) {
     case 1:
-      showMarks();
+      alert(`Current grades: ${grades}`);
       break;
     case 2:
-      retakeExam();
+      let index = parseInt(prompt("Enter array number:"));
+      let newGrade = +prompt("Enter new  grade:");
+
+      grades[index - 1] = newGrade;
+
+      alert(`Updated values in array element №${index}: ${grades}`);
       break;
     case 3:
-      checkScholarship();
+      let sum = 0;
+      for (let i = 0; i < grades.length; i++) {
+        sum = sum + grades[i];
+      }
+      sum = sum / 10;
+
+      if (sum >= 10.7) {
+        alert(`Sum of points = ${sum}. You can get a scholarship.`);
+      } else {
+        alert(`Sum of points = ${sum}. You CANNOT get a scholarship.`);
+      }
       break;
     case 0:
-      console.log("До побачення!");
+      // alert("Goodbye");
       break;
     default:
-      console.log("Неправильний вибір опції.");
+      alert("Incorrect choice of option");
   }
-} while (choice !== 0);
+} while (option !== 0);
 
